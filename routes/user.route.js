@@ -49,7 +49,7 @@ userRouter.post("/register", async (req, res) => {
 userRouter.post("/login", async (req, res) => {
     const { email, password } = req.body
     try {
-        const banneduser = await bannedModel.findOne(email)
+        const banneduser = await bannedModel.findOne({email})
         if(banneduser){
             res.send({msg:"User account has been banned"})
         }
