@@ -4,9 +4,8 @@ const bcrypt = require("bcrypt")
 const UserModel = require("../models/user.model")
 const { auth } = require("../middlewares/auth")
 const { adminauth } = require("../middlewares/adminauth")
-
 const userRouter = express.Router()
-
+const bannedModel  = require("../models/banneduser.model")
 userRouter.get("/",adminauth, async (req, res) => {
     try {
         let User = await UserModel.find()
@@ -19,20 +18,6 @@ userRouter.get("/",adminauth, async (req, res) => {
         res.send({ msg: "Error", reason: e.message })
     }
 })
-
-// userRouter.get("/banned/:id", auth, async (req, res) => {
-//     const id = req.params.id
-//     try {
-//         let User = await UserModel.findById(id)
-//         if (User.length > 0) {
-//             res.send({ users: User });
-//         } else {
-//             res.send({ msg: `No user found` })
-//         }
-//     } catch (e) {
-//         res.send({ msg: "Error", reason: e.message })
-//     }
-// })
 
 
 userRouter.post("/register", async (req, res) => {
@@ -63,7 +48,6 @@ userRouter.post("/register", async (req, res) => {
 
 userRouter.post("/login", async (req, res) => {
     const { email, password } = req.body
-     
     try {
         const banneduser = await bannedModel.findOne(email)
         if(banneduser){
