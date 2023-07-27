@@ -24,6 +24,7 @@ cartRoute.get("/",auth, async (req, res) => {
 cartRoute.post("/add",auth, async (req, res) => {
     req.body.payment = false
     req.body.dispatch = false
+    req.body.count = 1
     const payload = req.body
     console.log(payload)
     try {
