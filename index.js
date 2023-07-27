@@ -18,8 +18,6 @@ app.use(express.json());
 app.use("/user", userRouter)
 app.use("/admin", adminRouter)
 app.use("/product", productRouter)
-app.use(auth)
-app.use(Logger)
 app.use("/cart", cartRoute)
 app.use(adminauth)
 app.use("/banneduser", bannedRoutes)

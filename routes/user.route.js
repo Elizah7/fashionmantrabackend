@@ -67,6 +67,7 @@ userRouter.post("/login", async (req, res) => {
             } else {
                 res.send({ msg: `Email ${email} does not Exist. Try Registring` })
             }
+            
         }
     } catch (e) {
         res.send({ msg: "Error", reason: e.message })

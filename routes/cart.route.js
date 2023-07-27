@@ -1,9 +1,10 @@
 const express = require("express")
 const cartModel = require("../models/cart.model");
+const { auth } = require("../middlewares/auth");
 
 const cartRoute = express.Router()
 
-cartRoute.get("/", async (req, res) => {
+cartRoute.get("/",auth, async (req, res) => {
     const userId = req.body.userId
     console.log("get",userId)
     try {
@@ -20,7 +21,7 @@ cartRoute.get("/", async (req, res) => {
     }
 })
 
-cartRoute.post("/add", async (req, res) => {
+cartRoute.post("/add",auth, async (req, res) => {
     req.body.payment = false
     req.body.dispatch = false
     const payload = req.body
@@ -34,7 +35,7 @@ cartRoute.post("/add", async (req, res) => {
     }
 })
 
-cartRoute.patch("/update/:id", async (req, res) => {
+cartRoute.patch("/update/:id",auth, async (req, res) => {
     const payload = req.body
     const id = req.params.id;
     try {
@@ -46,7 +47,7 @@ cartRoute.patch("/update/:id", async (req, res) => {
     }
 })
 
-cartRoute.delete("/delete/:id", async (req, res) => {
+cartRoute.delete("/delete/:id",auth, async (req, res) => {
     const id = req.params.id;
     try {
         await cartModel.findByIdAndDelete(id);
