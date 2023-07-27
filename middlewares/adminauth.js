@@ -4,7 +4,7 @@ const adminModel = require("../models/admin.model")
 const adminauth = async (req, res, next) => {
    const token = req.headers.authorization
    if (token) {
-      const decoded = jwt.verify(token,"tough-admin")
+      const decoded = jwt.verify(token,"fashionmantra")
       if (decoded) {
          console.log("decoded",decoded)
          const adminid = decoded.userId
