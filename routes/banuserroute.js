@@ -9,7 +9,7 @@ const { adminauth } = require("../middlewares/adminauth")
 
 const bannedRoutes = express.Router()
 
-bannedRoutes.get("/", auth, async (req, res) => {
+bannedRoutes.get("/", async (req, res) => {
 
     try {
         let User = await bannedModel.find()
@@ -25,7 +25,7 @@ bannedRoutes.get("/", auth, async (req, res) => {
 })
 
 
-bannedRoutes.post("/add/:id",auth, async (req, res) => {
+bannedRoutes.post("/add/:id", async (req, res) => {
     const id = req.params.id
     console.log(req.body)
     try {
